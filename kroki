@@ -1,0 +1,41 @@
+utworzyć repo na github z readme i .gitignore
+
+dopisać do .gitignore :
+/build/
+/.gradle/
+/.idea/
+
+utworzyć plik build gradle i skopiować :
+plugins {
+    id 'java'
+}
+group = 'pl.zajavka'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+ext {
+    springVersion = '5.3.23'
+    lombokVersion = '1.18.24'
+    junitVersion = '5.9.0'
+    logbackVersion = '1.2.11'
+}
+dependencies {
+
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+    testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+    testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+}
+repositories {
+    mavenCentral()
+}
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+W katalogu z projektem utworyć Directory src/main/java itd... Jak klikniemy ppm i new Directory to na dole w okienku są podpowiedzi do katalogow resource test i main
