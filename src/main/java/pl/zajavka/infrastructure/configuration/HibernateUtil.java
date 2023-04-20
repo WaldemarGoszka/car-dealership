@@ -8,6 +8,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Environment;
+import pl.zajavka.infrastructure.database.entity.*;
 
 import java.util.Map;
 @Slf4j
@@ -40,8 +41,18 @@ public class HibernateUtil {
                     .build();
 
             Metadata metadata = new MetadataSources(standardServiceRegistry)
-                    // tu będziemy mapować encje
-                    .getMetadataBuilder()
+                    .addAnnotatedClass(AddressEntity.class)
+                    .addAnnotatedClass(CarServiceRequestEntity.class)
+                    .addAnnotatedClass(CarToBuyEntity.class)
+                    .addAnnotatedClass(CarToServiceEntity.class)
+                    .addAnnotatedClass(CustomerEntity.class)
+                    .addAnnotatedClass(InvoiceEntity.class)
+                    .addAnnotatedClass(MechanicEntity.class)
+                    .addAnnotatedClass(PartEntity.class)
+                    .addAnnotatedClass(SalesmanEntity.class)
+                    .addAnnotatedClass(ServiceEntity.class)
+                    .addAnnotatedClass(ServiceMechanicEntity.class)
+                    .addAnnotatedClass(ServicePartEntity.class)
                     .build();
 
             return metadata.getSessionFactoryBuilder().build();
