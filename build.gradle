@@ -3,7 +3,7 @@ plugins {
 }
 group = 'pl.zajavka'
 version = '1.0'
-sourceCompatibility = '17'
+//sourceCompatibility = '17'
 
 dependencies {
 

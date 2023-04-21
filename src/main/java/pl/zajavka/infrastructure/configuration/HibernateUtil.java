@@ -53,6 +53,7 @@ public class HibernateUtil {
                     .addAnnotatedClass(ServiceEntity.class)
                     .addAnnotatedClass(ServiceMechanicEntity.class)
                     .addAnnotatedClass(ServicePartEntity.class)
+                    .getMetadataBuilder()
                     .build();
 
             return metadata.getSessionFactoryBuilder().build();
