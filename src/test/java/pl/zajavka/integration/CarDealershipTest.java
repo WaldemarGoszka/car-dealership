@@ -40,6 +40,7 @@ public class CarDealershipTest {
     @Order(2)
     void init() {
         log.info("### RUNING ORDER 2");
+        carDealershipManagementService.init();
 
     }
 
