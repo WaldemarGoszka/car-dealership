@@ -2,21 +2,38 @@ package pl.zajavka.integration;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
+import pl.zajavka.business.management.CarDealershipManagementService;
+import pl.zajavka.business.management.FileDataPreparationService;
+import pl.zajavka.business.management.InputDataCashe;
 import pl.zajavka.infrastructure.configuration.HibernateUtil;
+import pl.zajavka.infrastructure.database.repository.CarDealershipManagementRepository;
+
+import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CarDealershipTest {
+    private CarDealershipManagementService carDealershipManagementService;
+
     @AfterAll
     static void afterAll() {
         HibernateUtil.closeSessionFactory();
+    }
+
+    @BeforeEach
+    void beforeEach() {
+        this.carDealershipManagementService = new CarDealershipManagementService(
+                new CarDealershipManagementRepository(),
+                new FileDataPreparationService()
+        );
     }
 
     @Test
     @Order(1)
     void purge() {
         log.info("### RUNING ORDER 1");
-
+        carDealershipManagementService.purge();
     }
 
     @Test

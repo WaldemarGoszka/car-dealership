@@ -7,11 +7,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @UtilityClass
 public class InputDataCashe {
-    public static final String FILE_PATH = ".src/main/resources/40-car-dealership-traffic-simulation.md";
+    public static final String FILE_PATH = "src/main/resources/40-car-dealership-traffic-simulation.md";
 
     private static final Map<String, List<String>> inputData;
 
@@ -25,8 +26,8 @@ public class InputDataCashe {
 
     private static Map<String, List<String>> readFileContent() throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(FILE_PATH)).stream()
-                .filter(line -> line.startsWith("[//]: #"))
-                .filter(line -> line.isBlank())
+                .filter(line -> !line.startsWith("[//]: #"))
+                .filter(line -> !line.isBlank())
                 .toList();
 
         return lines.stream()
@@ -38,7 +39,11 @@ public class InputDataCashe {
                         )
                 ));
     }
-    public static Map<String, List<String>> getInputData{
+    public static <T> List<T> getInputData(
+            final Keys.InputDataGroup inputDataGroup,
+            final Keys.Entity entity,
+            Function<String,T> mapper){
+
         return inputData;
     }
 }
